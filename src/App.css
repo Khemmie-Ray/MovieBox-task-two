@@ -117,12 +117,22 @@ footer {
     flex-direction: column;
   }
 
-  .card {
+  header input {
+    color: white;
+    width: 100%;
+    margin: 1em 0;
+  }
+
+  .card, header, .content {
     width: 90%;
   }
 
+  h1 {
+    font-size: 2rem;
+  }
+
   .heroBg {
-    height: 90vh;
+    height: 100vh;
   }
 
   header {
