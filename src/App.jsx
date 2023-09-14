@@ -27,7 +27,6 @@ function App() {
           }
         );
         const data = await response.json();
-        console.log(data.results);
         setMovieData(data.results);
       } catch (err) {
         console.error(err);
@@ -55,42 +54,48 @@ function App() {
 
   function handleSearchMovie(event) {
       setQuery(event.target.value);
+      console.log(query)
   }
 
   const searchMovieData = () => {
     fetch(`https://www.omdbapi.com/?t=${query}&apikey=57b8a098`)
       .then((response) => response.json())
       .then((data) => {
+        console.log(data)
         setSearchMovie(data);
       })
       .catch((error) => {
         console.error(error);
       });
   };
+console.log(searchMovie)
 
   const MovieSearch = searchMovie.map((data) => (
-     `<div class="card">
-     <p>Movie Search</p>
-                    <img src=${data.Poster} alt="">
-                </div>
+              <div class="card">
+                <p>Movie Search</p>
+                    <img src={data.Poster} alt="" />
                 <div class="movie-info" id="moviedata">
                     <h2>${data.Title}</h2>
                     <ul>
-                        <li>Year: ${data.Year}</li>
+                        <li>Year: {data.Year}</li>
                         <li>Type: N/A</li>
-                        <li>Ratings: ${data.Rated}</li>
-                        <li>Released: ${data.Released}</li>
+                        <li>Ratings: {data.Rated}</li>
+                        <li>Released: {data.Released}</li>
                     </ul>
-                    <p>Genre: ${data.Genre}</p>
-                    <p>Language: ${data.Language}.</p>
-                </div>`))
+                    <p>Genre: {data.Genre}</p>
+                    <p>Language: {data.Language}.</p>
+                </div>
+                </div>))
 
   return (
     <>
       <section style={{ backgroundImage: `url(${posterBg})` }} className="heroBg">
         <header>
           <img src={logo} alt="" />
-          <input type="text" placeholder="search" onChange={handleSearchMovie} />
+          <input type="text" 
+          placeholder="search"
+          value={query} 
+          onChange={handleSearchMovie} />
           <div>
             <a href="Sign In">Sign In</a>
             <a href="#"><i className="ri-menu-line menu"></i></a>
@@ -102,8 +107,10 @@ function App() {
           <button>Watch Trailer <i className="ri-play-circle-fill"></i></button>
         </div>
       </section>
-      <section>{MovieSearch}</section>
       <section>
+        {MovieSearch}
+        </section>
+      <section className='feature'>
         <h2>Featured Movies</h2>
         <div className="card-container">
         {MovieCard}
