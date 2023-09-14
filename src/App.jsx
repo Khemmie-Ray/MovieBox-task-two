@@ -3,11 +3,13 @@ import './App.css';
 import posterBg from './assets/Poster.svg';
 import logo from './assets/Logo.svg';
 import imLogo from './assets/imdb.svg'
-// import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
+//import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
 // import MovieDetails from './MovieDetails';
 
 function App() {
   const [movieData, setMovieData] = useState([]);
+  const [searchMovie, setSearchMovie]  = useState([]);
+  const [query,  setQuery] = useState('');
 
   useEffect(() => {
     const fetchData = async () => {
@@ -38,7 +40,7 @@ function App() {
   const first10Movies = movieData.slice(0, 10);
 
   const MovieCard = first10Movies.map((info) => (
-    // <Link key={info.id} to={`/movie/${info.id}`}>
+     // <Link key={info.id} to={`/movie/${info.id}`}>
     <div key={info.id} className='card' data-testid='movie-card'>
       <img src={`https://image.tmdb.org/t/p/w500/${info.poster_path}`} alt="" data-testid='movie-poster' />
       <p data-testid='movie-release-date'>{info.release_date}</p>
@@ -48,15 +50,47 @@ function App() {
         <img src={imLogo} alt="" />
       </div>
     </div>
-    // </Link>
+     // </Link>
   ));
+
+  function searchMovie(event) {
+      setQuery(event.target.value);
+  }
+
+  const searchMovieData = () => {
+    fetch(`https://www.omdbapi.com/?t=${query}&apikey=57b8a098`)
+      .then((response) => response.json())
+      .then((data) => {
+        setSearchMovie(data);
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  };
+
+  const MovieSearch = searchMovie.map((data) => (
+     `<div class="card">
+     <p>Movie Search</p>
+                    <img src=${data.Poster} alt="">
+                </div>
+                <div class="movie-info" id="moviedata">
+                    <h2>${data.Title}</h2>
+                    <ul>
+                        <li>Year: ${data.Year}</li>
+                        <li>Type: N/A</li>
+                        <li>Ratings: ${data.Rated}</li>
+                        <li>Released: ${data.Released}</li>
+                    </ul>
+                    <p>Genre: ${data.Genre}</p>
+                    <p>Language: ${data.Language}.</p>
+                </div>`)
 
   return (
     <>
       <section style={{ backgroundImage: `url(${posterBg})` }} className="heroBg">
         <header>
           <img src={logo} alt="" />
-          <input type="text" placeholder="search" />
+          <input type="text" placeholder="search" onChange={searchMovie} />
           <div>
             <a href="Sign In">Sign In</a>
             <a href="#"><i className="ri-menu-line menu"></i></a>
@@ -68,6 +102,7 @@ function App() {
           <button>Watch Trailer <i className="ri-play-circle-fill"></i></button>
         </div>
       </section>
+      <section>{MovieSearch}</section>
       <section>
         <h2>Featured Movies</h2>
         <div className="card-container">
