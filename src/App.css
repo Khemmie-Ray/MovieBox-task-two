@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,700&display=swap');
+hu@import url('https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,700&display=swap');
 
 * {
   box-sizing: border-box;
@@ -110,4 +110,22 @@ header a {
 
 footer {
   text-align: center;
+}
+
+@media(max-width: 600px) {
+  .card-container, header {
+    flex-direction: column;
+  }
+
+  .card {
+    width: 90%;
+  }
+
+  .heroBg {
+    height: 90vh;
+  }
+
+  header {
+    justify-content: center;
+  }
 }
