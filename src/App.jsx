@@ -2,6 +2,9 @@ import React, { useState, useEffect } from 'react';
 import './App.css';
 import posterBg from './assets/Poster.svg';
 import logo from './assets/Logo.svg';
+import imLogo from './assets/imdb.svg'
+// import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
+// import MovieDetails from './MovieDetails';
 
 function App() {
   const [movieData, setMovieData] = useState([]);
@@ -35,11 +38,17 @@ function App() {
   const first10Movies = movieData.slice(0, 10);
 
   const MovieCard = first10Movies.map((info) => (
-    <div key={info.id} className='card'>
-      <img src={`https://image.tmdb.org/t/p/w500/${info.poster_path}`} alt="" />
-      <p>{}</p>
-      <h2>{info.title}</h2>
+    // <Link key={info.id} to={`/movie/${info.id}`}>
+    <div key={info.id} className='card' data-testid='movie-card'>
+      <img src={`https://image.tmdb.org/t/p/w500/${info.poster_path}`} alt="" data-testid='movie-poster' />
+      <p data-testid='movie-release-date'>{info.release_date}</p>
+      <h2 data-testid='movie-title'>{info.title}</h2>
+      <div>
+      <p className='vote'>{info.vote_average}</p>
+        <img src={imLogo} alt="" />
+      </div>
     </div>
+    // </Link>
   ));
 
   return (
@@ -59,8 +68,11 @@ function App() {
           <button>Watch Trailer <i className="ri-play-circle-fill"></i></button>
         </div>
       </section>
-      <section className="card-container">
+      <section>
+        <h2>Featured Movies</h2>
+        <div className="card-container">
         {MovieCard}
+        </div>
       </section>
       <footer>
         <div className="socials">
@@ -76,6 +88,8 @@ function App() {
         </div>
         <p>&copy; 2023 MovieBox by Khemmie-Ray</p>
       </footer>
+
+      {/* <Route path="/movie/:movieId" component={MovieDetails} /> */}
     </>
   );
 }
