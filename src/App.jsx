@@ -53,7 +53,7 @@ function App() {
      // </Link>
   ));
 
-  function searchMovie(event) {
+  function handleSearchMovie(event) {
       setQuery(event.target.value);
   }
 
@@ -83,14 +83,14 @@ function App() {
                     </ul>
                     <p>Genre: ${data.Genre}</p>
                     <p>Language: ${data.Language}.</p>
-                </div>`)
+                </div>`))
 
   return (
     <>
       <section style={{ backgroundImage: `url(${posterBg})` }} className="heroBg">
         <header>
           <img src={logo} alt="" />
-          <input type="text" placeholder="search" onChange={searchMovie} />
+          <input type="text" placeholder="search" onChange={handleSearchMovie} />
           <div>
             <a href="Sign In">Sign In</a>
             <a href="#"><i className="ri-menu-line menu"></i></a>
