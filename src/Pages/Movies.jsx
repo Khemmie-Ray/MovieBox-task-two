@@ -3,6 +3,7 @@ import posterBg from '../assets/Poster.svg';
 import imLogo from '../assets/imdb.svg'
 import { Link } from 'react-router-dom';
 import logo from '../assets/Logo.svg';
+import Footer from '../components/Footer';
 
 function Movies() {
   const [movieData, setMovieData] = useState([]);
@@ -34,7 +35,7 @@ function Movies() {
     fetchData();
   }, []);
 
-  const first10Movies = movieData.slice(0, 10);
+  const first10Movies = movieData.slice(0, 12);
 
   const MovieCard = first10Movies.map((info) => (
     <div key={info.id} className='card' data-testid='movie-card'>
@@ -113,9 +114,7 @@ function Movies() {
         {MovieCard}
         </div>
       </section>
-     
-
-      {/* <Route path="/movie/:movieId" component={MovieDetails} /> */}
+    <Footer />
     </>
   );
 }
