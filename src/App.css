@@ -28,6 +28,44 @@ footer a {
   padding-right: 1em;
 }
 
+.quiz-card h3 {
+  font-size: 15px;
+}
+
+.quiz-card p {
+  font-size: 12px;
+}
+
+.sidebar a {
+  color: #666;
+  font-size: 20px;
+}
+
+.sidebar li {
+  margin-bottom: 75px;
+}
+
+.sidebar li:first-child {
+  margin-bottom: 47px;
+}
+
+.sidebar li:nth-child(3) {
+  margin: 46px 0 75px;
+}
+
+.genre {
+  color: #BE123C;
+  margin-left: 1em;
+}
+
+.rating i {
+  color: #FFD336;
+ }
+ 
+ .vote {
+   color: #E8E8E8;
+ }
+
 /* ===== Layout ====== */
 
 .heroBg {
@@ -63,12 +101,13 @@ header, .card-container {
   margin: 1em auto;
 }
 
-header, .card-container, .heroBg {
+header, .card-container, .heroBg,
+.details-container, .quiz-card, 
+.subtitle, .overview-card {
   display: flex;
 }
 
 header {
-  justify-content: space-between;
   padding: 1em 0; 
   position: absolute; 
   top: 0;
@@ -99,8 +138,122 @@ header a {
   text-decoration: none;
 }
 
-.card-container {
+.card-container, .details-container, 
+header, .overview-card {
   justify-content: space-between;
+}
+
+.details-container, .subtitle {
+  align-items: center;
+}
+
+.sidebar {
+  width: 20%;
+  border: 1px solid grey;
+  border-top-right-radius: 45px;
+  border-bottom-right-radius: 45px;
+  align-self: baseline;
+  padding: 2em 0;
+}
+
+.rating {
+  margin-left: auto;
+}
+
+
+.quiz-card {
+  flex-direction: column;
+}
+
+.sidebar ul {
+  padding: 0;
+}
+
+.sidebar li {
+  padding-left: 4em;
+}
+
+.poster-img {
+  object-fit: cover;
+  object-position: center;
+  height: 450px;
+  width: 100%;
+  border-radius: 20px;
+}
+
+.quiz-card {
+  border: 1px solid rgba(190, 18, 60, 0.70);
+  border-radius: 20px;
+  background-color: rgba(248, 231, 235, 0.40);
+  width: 80%;
+  padding: 1em;
+  margin: 0 auto;
+}
+
+.sidebar li i {
+  margin-right: 10px;
+}
+
+.active {
+   background-color: rgba(190, 18, 60, 0.20);
+   padding: 2em 0;
+   border-right: 3px solid #BE123C;
+}
+
+.quiz-card button, 
+.btn-option {
+  background-color: rgba(190, 18, 60, 0.20);
+  color: #BE123C;
+  border: 0;
+}
+
+.btn-showtime {
+  background-color: #BE123C;
+  color: white;
+  border: 0;
+}
+
+.quiz-card button { 
+  padding: .5em 1em;
+  border-radius: 20px;
+  align-self: center;
+}
+
+.side-logo {
+  margin: 0 auto 45px;
+  width: 186px;
+}
+
+li {
+  list-style: none;
+}
+
+.details-card {
+  width: 80%;
+  padding: 2em 3em;
+
+}
+
+.overview {
+  width: 65%;
+}
+
+.options-card {
+  width: 30%;
+}
+
+.options-card button {
+  width: 100%;
+  margin-bottom: 1em;
+  padding: 1em;
+  border-radius: 10px;
+}
+
+.poster-bg {
+  width: 100%;
+}
+
+.card-container {
   flex-wrap: wrap;
 }
 
@@ -122,23 +275,55 @@ footer {
   text-align: center;
 }
 
+.hamburger {
+  display: none;
+}
+
 @media(max-width: 600px) {
-  .card-container, header {
+  .card-container, header, 
+  .details-container, 
+  .overview-card {
     flex-direction: column;
+  }
+
+  .subtitle {
+    flex-wrap: wrap;
   }
 
   header input {
     color: white;
-    width: 100%;
     margin: 1em 0;
   }
 
-  .card, header, .content {
+  .card, header, .content,
+  .sidebar, .quiz-card {
     width: 90%;
+  }
+
+  .overview-card {
+    padding: 1em;
   }
 
   h1 {
     font-size: 2rem;
+  }
+
+  .details-card, .overview,
+  .options-card,
+  header input, .sidebar {
+    width: 100%;
+  }
+
+  .details-card {
+    padding: 0;
+  }
+
+  .poster-img {
+    border-radius: 0;
+  }
+
+  .overview-card, .subtitle{
+    padding: 0 1.4em;
   }
 
   .heroBg {
@@ -147,5 +332,34 @@ footer {
 
   header {
     justify-content: center;
+  }
+
+  nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1em;
+    background-color: red;
+  }
+
+  .hide {
+    display: none;
+  }
+
+  .show {
+    display: block;
+  }
+
+  .side-logo {
+    margin: 0;
+  }
+
+  .hamburger {
+    display: block;
+    font-size: 2rem;
+  }
+
+  .sidebar {
+    border: 0;
   }
 }
