@@ -309,6 +309,7 @@ footer {
 
   h1 {
     font-size: 2rem;
+    margin-top: 2em;
   }
 
   .details-card, .overview,
@@ -331,6 +332,10 @@ footer {
 
   .heroBg {
     height: 100vh;
+  }
+
+  .signin {
+    margin-top: 1em;
   }
 
   header {

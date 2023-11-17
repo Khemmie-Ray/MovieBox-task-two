@@ -97,8 +97,8 @@ function handleSearchMovie(event) {
         value={query}
         onChange={handleSearchMovie}
         />
-        <div>
-          <a href="Sign In">Sign In</a>
+        <div className='signin'>
+          <a href="#">Sign In</a>
           <a href="#"><i className="ri-menu-line menu"></i></a>
         </div>
       </header>
