@@ -31,7 +31,7 @@ useEffect(() => {
           }
         );
         const data = await response.json();
-        setMovieData(data.results);
+        setMovieData(data.results.slice(0, 12));
       } catch (err) {
         console.error(err);
       }
@@ -39,8 +39,6 @@ useEffect(() => {
 
     fetchData();
   }, []);
-
-  // const first10Movies = movieData.slice(0, 12);
 
   const MovieCard = movieData.map((info) => (
     <div key={info.id} className='card' data-testid='movie-card'>
@@ -57,6 +55,7 @@ useEffect(() => {
   ));
 
 const fetchSearchData = () => {
+  
         fetch(
           `https://api.themoviedb.org/3/search/movie?query=${encodeURIComponent(
             query
