@@ -10,6 +10,7 @@ function Movies() {
   const [movieData, setMovieData] = useState([]);
   const [query,  setQuery] = useState('');
   const apiKey = import.meta.env.VITE_MOVIEDB_API_KEY;
+  const [loading, setLoading] = useState(true);
 
 useEffect(() => {
     fetchSearchData();
@@ -32,15 +33,19 @@ useEffect(() => {
         );
         const data = await response.json();
         setMovieData(data.results.slice(0, 12));
+        setLoading(false); 
       } catch (err) {
         console.error(err);
+        setLoading(false); 
       }
     };
 
     fetchData();
   }, []);
 
-  const MovieCard = movieData.length > 0 && movieData.map((info) => (
+  const MovieCard = loading ? (
+    <p>Loading...</p>
+  ) : (movieData.map((info) => (
     <div key={info.id} className='card' data-testid='movie-card'>
      <Link key={info.id} to={`/${info.id}`}>
       <img src={`https://image.tmdb.org/t/p/w500/${info.poster_path}`} alt="" data-testid='movie-poster' />
@@ -51,7 +56,7 @@ useEffect(() => {
         <img src={imLogo} alt="" />
       </div>
       </Link>
-    </div>
+    </div>)
   ));
 
 const fetchSearchData = () => {
@@ -71,7 +76,7 @@ const fetchSearchData = () => {
           }
         ).then(res => res.json())
         .then(data => {
-          setMovieData(data.results)
+          setMovieData(data.results.slice(0, 12))
         })
         .catch((err) => {
               console.error(err);
