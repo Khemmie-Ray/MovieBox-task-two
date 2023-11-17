@@ -40,9 +40,9 @@ useEffect(() => {
     fetchData();
   }, []);
 
-  const first10Movies = movieData.slice(0, 12);
+  // const first10Movies = movieData.slice(0, 12);
 
-  const MovieCard = first10Movies.map((info) => (
+  const MovieCard = movieData.map((info) => (
     <div key={info.id} className='card' data-testid='movie-card'>
      <Link key={info.id} to={`/${info.id}`}>
       <img src={`https://image.tmdb.org/t/p/w500/${info.poster_path}`} alt="" data-testid='movie-poster' />
