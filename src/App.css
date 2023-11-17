@@ -73,6 +73,8 @@ footer a {
   color: white;
   flex-direction: column;
   padding: 1em;
+  background-size: cover;
+  background-position: center;
 }
 
 .menu {
@@ -154,6 +156,7 @@ header, .overview-card {
   border-bottom-right-radius: 45px;
   align-self: baseline;
   padding: 2em 0;
+  height: 100vh;
 }
 
 .rating {
@@ -175,7 +178,7 @@ header, .overview-card {
 
 .poster-img {
   object-fit: cover;
-  object-position: center;
+  object-position: center top;
   height: 450px;
   width: 100%;
   border-radius: 20px;
@@ -331,7 +334,7 @@ footer {
   }
 
   header {
-    justify-content: center;
+    align-items: flex-start;
   }
 
   nav {
@@ -339,14 +342,14 @@ footer {
     align-items: center;
     justify-content: space-between;
     padding: 1em;
-    background-color: red;
+    border-bottom: 1px solid #666;
   }
 
   .hide {
     display: none;
   }
 
-  .show {
+  .show, .hamburger {
     display: block;
   }
 
@@ -355,11 +358,23 @@ footer {
   }
 
   .hamburger {
-    display: block;
     font-size: 2rem;
   }
 
   .sidebar {
     border: 0;
+    height: auto;
+  }
+
+  .overview {
+    margin-bottom: 1em;
+  }
+
+  .subtitle h2 {
+    margin-bottom: 0;
+  }
+
+  .quiz-card {
+    margin-top: 1.4em;
   }
 }

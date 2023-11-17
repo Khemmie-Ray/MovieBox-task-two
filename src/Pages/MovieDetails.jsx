@@ -2,10 +2,17 @@ import React, { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom';
 import logo from '../assets/movieLogo.svg';
 import posterBg from '../assets/moviebg.svg';
+import { Link } from 'react-router-dom';
 
 const MovieDetails = () => {
     const { movieId } = useParams();
     const [movieDetails, setMovieDetails] = useState(null);
+    const [isMenuOpen, setMenuOpen] = useState(false);
+    const apiKey = import.meta.env.VITE_MOVIEDB_API_KEY;
+
+    const toggleMenu = () => {
+      setMenuOpen(!isMenuOpen);
+    };
 
     useEffect(() => {
       fetch(
@@ -16,7 +23,7 @@ const MovieDetails = () => {
           headers: {
             accept: 'application/json',
             Authorization:
-              'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJmNzViNDE4ZTcyMGI0NDk0ZDdkMDQ2OWExY2M4ZjZmZSIsInN1YiI6IjY1MDA5NGMwNTU0NWNhMDBmZWE2YjMwMiIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.JHVLVRgITnuDtg9BlNFy7Aawslr5goZjUGc3K5lk1p0',
+              `Bearer ${apiKey}`,
           }
         }). then(res => res.json())
         .then(data => {
@@ -55,17 +62,15 @@ const MovieDetails = () => {
             </div>
         );
     }
-    
-  console.log(movieDetails)
 
     return (
       <section className='details-container'>
         <div className="sidebar">
           <nav>
-          <img src={logo} alt="" className='side-logo'/>
-          <i className="ri-menu-2-line hamburger"></i>
+            <Link to='/'><img src={logo} alt="" className='side-logo'/></Link>
+          <i className="ri-menu-2-line hamburger" onClick={toggleMenu}></i>
           </nav>
-          <ul className='navlinks'>
+          <ul className={`navlinks ${isMenuOpen ? 'show' : 'hide'}`}>
             <li><a href="#"><i className="ri-home-4-fill"></i>Home</a></li>
             <li className='active'><a href="#"><i className="ri-vidicon-fill"></i>Movies</a></li>
             <li><a href="#"><i className="ri-tv-fill"></i>TV Series</a></li>

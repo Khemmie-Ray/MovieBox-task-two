@@ -5,10 +5,15 @@ import { Link } from 'react-router-dom';
 import logo from '../assets/Logo.svg';
 import Footer from '../components/Footer';
 
+
 function Movies() {
   const [movieData, setMovieData] = useState([]);
-  const [searchMovie, setSearchMovie]  = useState([]);
-  // const [query,  setQuery] = useState('');
+  const [query,  setQuery] = useState('');
+  const apiKey = import.meta.env.VITE_MOVIEDB_API_KEY;
+
+useEffect(() => {
+    fetchSearchData();
+}, [query]);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -21,7 +26,7 @@ function Movies() {
             headers: {
               accept: 'application/json',
               Authorization:
-                'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJmNzViNDE4ZTcyMGI0NDk0ZDdkMDQ2OWExY2M4ZjZmZSIsInN1YiI6IjY1MDA5NGMwNTU0NWNhMDBmZWE2YjMwMiIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.JHVLVRgITnuDtg9BlNFy7Aawslr5goZjUGc3K5lk1p0',
+                `Bearer ${apiKey}`,
             },
           }
         );
@@ -51,40 +56,32 @@ function Movies() {
     </div>
   ));
 
-//   function handleSearchMovie(event) {
-//       setQuery(event.target.value);
-//       console.log(query)
-//   }
+const fetchSearchData = () => {
+        fetch(
+          `https://api.themoviedb.org/3/search/movie?query=${encodeURIComponent(
+            query
+          )}`,
+          {
+            method: 'GET',
+            cache: 'force-cache',
+            headers: {
+              accept: 'application/json',
+              Authorization:
+                `Bearer ${apiKey}`,
+            },
+          }
+        ).then(res => res.json())
+        .then(data => {
+          setMovieData(data.results)
+        })
+        .catch((err) => {
+              console.error(err);
+        })
+}
 
-//   const searchMovieData = () => {
-//     fetch(`https://www.omdbapi.com/?t=${query}&apikey=57b8a098`)
-//       .then((response) => response.json())
-//       .then((data) => {
-//         console.log(data)
-//         setSearchMovie(data);
-//       })
-//       .catch((error) => {
-//         console.error(error);
-//       });
-//   };
-// console.log(searchMovie)
-
-  // const MovieSearch = searchMovie.map((data) => (
-  //             <div class="card">
-  //               <p>Movie Search</p>
-  //                   <img src={data.Poster} alt="" />
-  //               <div class="movie-info" id="moviedata">
-  //                   <h2>${data.Title}</h2>
-  //                   <ul>
-  //                       <li>Year: {data.Year}</li>
-  //                       <li>Type: N/A</li>
-  //                       <li>Ratings: {data.Rated}</li>
-  //                       <li>Released: {data.Released}</li>
-  //                   </ul>
-  //                   <p>Genre: {data.Genre}</p>
-  //                   <p>Language: {data.Language}.</p>
-  //               </div>
-  //               </div>))
+function handleSearchMovie(event) {
+  setQuery(event.target.value);
+}
 
   return (
     <>
@@ -93,6 +90,8 @@ function Movies() {
         <img src={logo} alt="" />
         <input type="text" 
         placeholder="search"
+        value={query}
+        onChange={handleSearchMovie}
         />
         <div>
           <a href="Sign In">Sign In</a>
@@ -106,7 +105,6 @@ function Movies() {
         </div>
       </section>
       <section>
-        {/* {MovieSearch} */}
         </section>
       <section className='feature'>
         <h2>Featured Movies</h2>
